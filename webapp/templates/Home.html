@@ -1,0 +1,83 @@
+{% load rest_framework %}
+
+<html>
+    <head>
+        <title> Studentsdetails</title>
+        <center><h2>Students Details</h2></center>
+      
+        <style>
+          table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+
+        
+      
+      }
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+        .move{
+          padding-left: 25em;
+        }
+        .btn-btn-sucess{
+          background-color: forestgreen;
+          color: white;
+        }
+        .btn-btn-danger{
+          background-color: red;
+          color: white;
+          
+        }
+      </style>
+      
+    </head>
+    <body>
+
+
+
+
+<form action="addData" method="POST">
+  
+    {% csrf_token %}
+    <table class="move">
+
+    
+        <tr>
+     
+<th>S.No</th>
+<th>first_name</th>
+
+<th>last_name</th>
+
+<th>address</th>
+
+<th>roll_number</th>
+
+<th>mobile</th>
+</tr>
+
+{% for students in data %}
+<tr>
+  <td>{{forloop.counter}}</td>
+<td>{{ students.first_name}}</td>
+<td>{{ students.last_name}}</td>
+<td>{{ students.address}}</td>
+<td>{{ students.roll_number}}</td>
+<td>{{ students.mobile}}</td>
+<td><a class="btn-btn-sucess" href="updateData/{{data.id}}">Update</a></td>
+<td><a class="btn-btn-danger" href="deleteData/{{data.id}}">Delete</a></td>
+</tr>
+{% endfor %}
+ 
+</table>
+
+</form>
+
+
+</body></html>
