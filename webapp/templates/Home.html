@@ -1,77 +1,93 @@
-{% load rest_framework %}
 
 <html>
     <head>
         <title> Studentsdetails</title>
-        <center><h2>Students Details</h2></center>
-      
+        <center><h2>Students Details</h2></center><br>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <style>
           table {
         font-family: arial, sans-serif;
         border-collapse: collapse;
         width: 100%;
-
-        
-      
-      }
+ }
+ center{
+  color: blueviolet;
+ }
       td, th {
         border: 1px solid #dddddd;
         text-align: left;
         padding: 8px;
       }
       tr:nth-child(even) {
-        background-color: #dddddd;
+        background-color: #9ec0ea;
       }
         .move{
           padding-left: 25em;
         }
-        .btn-btn-sucess{
-          background-color: forestgreen;
-          color: white;
-        }
-        .btn-btn-danger{
-          background-color: red;
-          color: white;
+        
+  
+          a{
+            color: white;
+          }
+       
+       
           
-        }
       </style>
       
     </head>
     <body>
 
-
-
-
-<form action="addData" method="POST">
+<form action="{% url 'addData' %}" method="POST">
   
     {% csrf_token %}
+    <label>First_name</label>
+    <input type="text"  class="form-control"  name="first_name"required>
+        
+    <label>Last_name</label>
+    <input type="text" class="form-control" name="last_name" required>
+
+    <label>Address</label>
+    <input type="text" class="form-control" name="address" required>
+
+    <label>Roll_number</label>
+    <input type="text" class="form-control" name="roll_number"required>
+
+    <label>Mobile</label>
+    <input type="text" class="form-control" name="mobile" required>
+   
+   <div class="bt"><input type="submit" class="btn btn-primary"value="register"></div>
+  <br>
+  
     <table class="move">
 
     
         <tr>
      
 <th>S.No</th>
-<th>first_name</th>
+<th>First_name</th>
 
-<th>last_name</th>
+<th>Last_name</th>
 
-<th>address</th>
+<th>Address</th>
 
-<th>roll_number</th>
+<th>Roll_number</th>
 
-<th>mobile</th>
+<th>Mobile</th>
+<th>Updated</th>
+<th>Deleted</th>
 </tr>
 
 {% for students in data %}
 <tr>
   <td>{{forloop.counter}}</td>
+
 <td>{{ students.first_name}}</td>
 <td>{{ students.last_name}}</td>
 <td>{{ students.address}}</td>
 <td>{{ students.roll_number}}</td>
 <td>{{ students.mobile}}</td>
-<td><a class="btn-btn-sucess" href="updateData/{{data.id}}">Update</a></td>
-<td><a class="btn-btn-danger" href="deleteData/{{data.id}}">Delete</a></td>
+<td><button  type="button" class="btn btn-success"><a  href="{% url 'updated' students.id %}">Update</a></button></td>
+<td><button type="button" class="btn btn-danger"><a  href="{% url 'delete' students.id %}">Delete</a></button></td>
 </tr>
 {% endfor %}
  
